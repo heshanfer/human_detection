@@ -5,8 +5,8 @@ import numpy as np
 from train import create_model, IMAGE_SIZE
 from keras.applications.mobilenetv2 import preprocess_input
 
-WEIGHTS_FILE = "model-0.46.h5"
-IMAGES = "images/*jpg"
+WEIGHTS_FILE = "model-0.07.h5"
+IMAGES = "../images/*jpg"
 
 def main():
     model = create_model()
