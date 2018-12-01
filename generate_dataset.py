@@ -94,6 +94,8 @@ def main():
 
         path = os.path.join(DATASET_FOLDER, tree.findtext("./filename"))
 
+        path = ''.join([path.split(".")[0],".jpg"])
+        
         height = int(tree.findtext("./size/height"))
         width = int(tree.findtext("./size/width"))
         xmin = int(tree.findtext("./object/bndbox/xmin"))
