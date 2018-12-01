@@ -1,0 +1,27 @@
+<annotation>
+	<folder>P00025</folder>
+	<filename>P00025_11024.jpg</filename>
+	<path>images/P00025/P00025_11024.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1280</width>
+		<height>720</height>
+		<depth>1</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<class>person</class>
+		<gender>male</gender>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>316</xmin>
+			<ymin>246</ymin>
+			<xmax>412</xmax>
+			<ymax>524</ymax>
+		</bndbox>
+	</object>
+</annotation>

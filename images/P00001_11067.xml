@@ -1,0 +1,27 @@
+<annotation>
+	<folder>P00001</folder>
+	<filename>P00001_11067</filename>
+	<path>images/P00001/P00001_11067.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>1280</width>
+		<height>720</height>
+		<depth>1</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<class>person</class>
+		<gender>female</gender>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>853</xmin>
+			<ymin>281</ymin>
+			<xmax>994</xmax>
+			<ymax>635</ymax>
+		</bndbox>
+	</object>
+</annotation>
