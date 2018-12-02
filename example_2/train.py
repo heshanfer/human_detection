@@ -28,7 +28,7 @@ THREADS = 4
 TRAIN_CSV = "train.csv"
 VALIDATION_CSV = "validation.csv"
 
-CLASSES = 2
+CLASSES = 1
 
 class DataGenerator(Sequence):
 
