@@ -2,16 +2,16 @@ import glob
 import cv2
 import numpy as np
 
-from train import create_model, IMAGE_SIZE
+from train2 import create_model, IMAGE_SIZE
 from keras.applications.mobilenetv2 import preprocess_input
 
-WEIGHTS_FILE = "model-0.07.h5"
+WEIGHTS_FILE = "model-0.13.h5"
 IMAGES = "../images/*jpg"
 
 def main():
     model = create_model()
     model.load_weights(WEIGHTS_FILE)
-
+    model.summary()
     for filename in glob.glob(IMAGES):
         unscaled = cv2.imread(filename)
         image_height, image_width, _ = unscaled.shape

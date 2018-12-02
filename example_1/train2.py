@@ -6,9 +6,10 @@ import numpy as np
 from tensorflow.keras import Model
 from tensorflow.keras.applications.mobilenet_v2 import MobileNetV2, preprocess_input
 from tensorflow.keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau, Callback
-from tensorflow.keras.layers import Conv2D, Reshape
+from tensorflow.keras.layers import Conv2D, Reshape,Dense,Flatten
 from tensorflow.keras.utils import Sequence
 from tensorflow.keras.backend import epsilon
+
 
 # 0.35, 0.5, 0.75, 1.0
 ALPHA = 1.0
@@ -109,11 +110,17 @@ def create_model(trainable=False):
     for layer in model.layers:
         layer.trainable = trainable
 
-    x = model.layers[-1].output
-    x = Conv2D(4, kernel_size=3, name="coords")(x)
-    x = Reshape((4,))(x)
+    #x = model.layers[-1].output
+    #x = Conv2D(4, kernel_size=3, name="coords")(x)
+    #x = Reshape((4,))(x)
+    #return Model(inputs=model.input, outputs=x)
 
-    return Model(inputs=model.input, outputs=x)
+    x = model.layers[-1].output
+    x = Flatten()(x)
+    x = Dense(16,activation='relu')(x)
+    preds = Dense(4,activation='relu')(x)
+        
+    return Model(inputs = model.input,outputs = preds)
 
 def main():
     model = create_model()
@@ -122,26 +129,24 @@ def main():
     train_datagen = DataGenerator(TRAIN_CSV)
     validation_datagen = Validation(generator=DataGenerator(VALIDATION_CSV))
 
-    #model.compile(loss="mean_squared_error", optimizer="adam", metrics=[])
+    model.compile(loss="mean_squared_error", optimizer="adam", metrics=[])
 
-    #checkpoint = ModelCheckpoint("model-{val_iou:.2f}.h5", monitor="val_iou", verbose=1, save_best_only=True,
-    #                             save_weights_only=True, mode="max", period=1)
-    #stop = EarlyStopping(monitor="val_iou", patience=PATIENCE, mode="max")
-    #reduce_lr = ReduceLROnPlateau(monitor="val_iou", factor=0.2, patience=10, min_lr=1e-7, verbose=1, mode="max")
+    checkpoint = ModelCheckpoint("model-{val_iou:.2f}.h5", monitor="val_iou", verbose=1, save_best_only=True,
+                                 save_weights_only=True, mode="max", period=1)
+    stop = EarlyStopping(monitor="val_iou", patience=PATIENCE, mode="max")
+    reduce_lr = ReduceLROnPlateau(monitor="val_iou", factor=0.2, patience=10, min_lr=1e-7, verbose=1, mode="max")
 
     #model.summary()
 
-    #model.fit_generator(generator=train_datagen,
-    #                    epochs=EPOCHS,
-    #                    callbacks=[validation_datagen, checkpoint, reduce_lr, stop],
-    #                    workers=THREADS,
-    #                    use_multiprocessing=MULTI_PROCESSING,
-    #                    shuffle=True,
-    #                    verbose=1)
+    model.fit_generator(generator=train_datagen,
+                        epochs=EPOCHS,
+                        callbacks=[validation_datagen, checkpoint, reduce_lr, stop],
+                        workers=THREADS,
+                        use_multiprocessing=MULTI_PROCESSING,
+                        shuffle=True,
+                        verbose=1)
     
-    model.compile(optimizer='Adam',loss='categorical_crossentropy',metrics=['accuracy'])
-    H = model.fit_generator(generator=train_datagen, 
-                            steps_per_epoch=train_datagen.__len__(),epochs=EPOCHS)
+    
 
 
 

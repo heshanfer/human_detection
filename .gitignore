@@ -1,3 +1,10 @@
 example_1/images/
 example_2/images/
+example_3/images/
+example_4/images/
+
+example_1/__pycache__/
+example_2/__pycache__/
+example_3/__pycache__/
+example_4/__pycache__/
 
