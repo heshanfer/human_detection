@@ -2,10 +2,10 @@ import glob
 import cv2
 import numpy as np
 
-from train2 import create_model, IMAGE_SIZE
-from keras.applications.mobilenetv2 import preprocess_input
+from train3 import create_model, IMAGE_SIZE
+from keras.applications.mobilenet import preprocess_input
 
-WEIGHTS_FILE = "model-0.13.h5"
+WEIGHTS_FILE = "model-0.15.h5"
 IMAGES = "../images/*jpg"
 
 def main():
