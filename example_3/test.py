@@ -2,8 +2,8 @@ from train import *
 import cv2
 import glob
 
-WEIGHTS_FILE = "model-0.34.h5"
-IMAGES = "images/*jpg"
+WEIGHTS_FILE = "epoch200/model-0.94.h5"
+IMAGES = "../images/*jpg"
 THRESHOLD = 0.5
 EPSILON = 0.02
 
